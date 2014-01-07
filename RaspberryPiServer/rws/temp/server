@@ -1,0 +1,253 @@
+/* Define ISO C stdio on top of C++ iostreams.
+   Copyright (C) 1991, 1994-2008, 2009, 2010 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, write to the Free
+   Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+   02111-1307 USA.  */
+
+/*
+ *	ISO C99 Standard: 7.19 Input/output	<stdio.h>
+ */
+
+
+# define _STDIO_H	1
+# include <features.h>
+
+__BEGIN_DECLS
+
+# define __need_size_t
+# define __need_NULL
+# include <stddef.h>
+
+# include <bits/types.h>
+# define __need_FILE
+# define __need___FILE
+
+
+
+/* Define outside of namespace so the C++ is happy.  */
+struct _IO_FILE;
+
+__BEGIN_NAMESPACE_STD
+/* The opaque type of streams.  This is the definition used elsewhere.  */
+typedef struct _IO_FILE FILE;
+__END_NAMESPACE_STD
+__USING_NAMESPACE_STD(FILE)
+
+# define __FILE_defined	1
+
+
+
+/* The opaque type of streams.  This is the definition used elsewhere.  */
+typedef struct _IO_FILE __FILE;
+
+# define ____FILE_defined	1
+
+
+
+/* Copyright (C) 1991-2007, 2009, 2010 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, write to the Free
+   Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+   02111-1307 USA.  */
+
+/*
+ *	ISO C99 Standard: 7.20 General utilities	<stdlib.h>
+ */
+
+
+/* Copyright (C) 1991-1993,1995-2007,2009,2010,2011
+   Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, write to the Free
+   Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+   02111-1307 USA.  */
+
+
+/* These are defined by the user (or the compiler)
+   to specify the desired environment:
+
+   __STRICT_ANSI__	ISO Standard C.
+   _ISOC99_SOURCE	Extensions to ISO C89 from ISO C99.
+   _POSIX_SOURCE	IEEE Std 1003.1.
+   _POSIX_C_SOURCE	If ==1, like _POSIX_SOURCE; if >=2 add IEEE Std 1003.2;
+			if >=199309L, add IEEE Std 1003.1b-1993;
+			if >=199506L, add IEEE Std 1003.1c-1995;
+			if >=200112L, all of IEEE 1003.1-2004
+			if >=200809L, all of IEEE 1003.1-2008
+   _XOPEN_SOURCE	Includes POSIX and XPG things.  Set to 500 if
+			Single Unix conformance is wanted, to 600 for the
+			sixth revision, to 700 for the seventh revision.
+   _XOPEN_SOURCE_EXTENDED XPG things and X/Open Unix extensions.
+   _LARGEFILE_SOURCE	Some more functions for correct standard I/O.
+   _LARGEFILE64_SOURCE	Additional functionality from LFS for large files.
+   _FILE_OFFSET_BITS=N	Select default filesystem interface.
+   _BSD_SOURCE		ISO C, POSIX, and 4.3BSD things.
+   _SVID_SOURCE		ISO C, POSIX, and SVID things.
+   _ATFILE_SOURCE	Additional *at interfaces.
+   _GNU_SOURCE		All of the above, plus GNU extensions.
+   _REENTRANT		Select additionally reentrant object.
+   _THREAD_SAFE		Same as _REENTRANT, often used by other systems.
+   _FORTIFY_SOURCE	If set to numeric value > 0 additional security
+			measures are defined, according to level.
+
+   The `-ansi' switch to the GNU C compiler defines __STRICT_ANSI__.
+   If none of these are defined, the default is to have _SVID_SOURCE,
+   _BSD_SOURCE, and _POSIX_SOURCE set to one and _POSIX_C_SOURCE set to
+   200112L.  If more than one of these are defined, they accumulate.
+   For example __STRICT_ANSI__, _POSIX_SOURCE and _POSIX_C_SOURCE
+   together give you ISO C, 1003.1, and 1003.2, but nothing else.
+
+   These are defined by this file and are used by the
+   header files to decide what to declare or define:
+
+   __USE_ISOC99		Define ISO C99 things.
+   __USE_ISOC95		Define ISO C90 AMD1 (C95) things.
+   __USE_POSIX		Define IEEE Std 1003.1 things.
+   __USE_POSIX2		Define IEEE Std 1003.2 things.
+   __USE_POSIX199309	Define IEEE Std 1003.1, and .1b things.
+   __USE_POSIX199506	Define IEEE Std 1003.1, .1b, .1c and .1i things.
+   __USE_XOPEN		Define XPG things.
+   __USE_XOPEN_EXTENDED	Define X/Open Unix things.
+   __USE_UNIX98		Define Single Unix V2 things.
+   __USE_XOPEN2K        Define XPG6 things.
+   __USE_XOPEN2KXSI     Define XPG6 XSI things.
+   __USE_XOPEN2K8XSI    Define XPG7 XSI things.
+   __USE_LARGEFILE	Define correct standard I/O things.
+   __USE_LARGEFILE64	Define LFS things with separate names.
+   __USE_FILE_OFFSET64	Define 64bit interface as default.
+   __USE_BSD		Define 4.3BSD things.
+   __USE_SVID		Define SVID things.
+   __USE_MISC		Define things common to BSD and System V Unix.
+   __USE_ATFILE		Define *at interfaces and AT_* constants for them.
+   __USE_GNU		Define GNU extensions.
+   __USE_REENTRANT	Define reentrant/thread-safe *_r functions.
+   __USE_FORTIFY_LEVEL	Additional security measures used, according to level.
+   __FAVOR_BSD		Favor 4.3BSD things in cases of conflict.
+
+   The macros `__GNU_LIBRARY__', `__GLIBC__', and `__GLIBC_MINOR__' are
+   defined by this file unconditionally.  `__GNU_LIBRARY__' is provided
+   only for compatibility.  All new code should use the other symbols
+   to test for features.
+
+   All macros listed above as possibly being defined by this file are
+   explicitly undefined if they are not explicitly defined.
+   Feature-test macros that are not defined by the user or compiler
+   but are implied by the other feature-test macros defined (or by the
+   lack of any definitions) are defined by the file.  */
+
+
+/* Undefine everything, so we get a clean slate.  */
+
+/* Suppress kernel-name space pollution unless user expressedly asks
+   for it.  */
+# define __KERNEL_STRICT_NAMES
+
+/* Always use ISO C things.  */
+
+/* Convenience macros to test the versions of glibc and gcc.
+   Use them like this:
+      ... code requiring gcc 2.8 or later ...
+      Note - they won't work for gcc1 or glibc1, since the _MINOR macros
+   were not defined then.  */
+# define __GNUC_PREREQ(maj, min) 
+	((__GNUC__ << 16) + __GNUC_MINOR__ >= ((maj) << 16) + (min))
+
+
+/* If _BSD_SOURCE was defined by the user, favor BSD over POSIX.  */
+# define __FAVOR_BSD	1
+
+/* If _GNU_SOURCE was defined by the user, turn on all the other features.  */
+
+/* If nothing (other than _GNU_SOURCE) is defined,
+   define _BSD_SOURCE and _SVID_SOURCE.  */
+# define _BSD_SOURCE	1
+# define _SVID_SOURCE	1
+
+/* This is to enable the ISO C99 extension.  Also recognize the old macro
+   which was used prior to the standard acceptance.  This macro will
+   eventually go away and the features enabled by default once the ISO C99
+   standard is widely adopted.  */
+# define __USE_ISOC99	1
+
+/* This is to enable the ISO C90 Amendment 1:1995 extension.  */
+# define __USE_ISOC95	1
+
+/* If none of the ANSI/POSIX macros are defined, use POSIX.1 and POSIX.2
+   (and IEEE Std 1003.1b-1993 unless _XOPEN_SOURCE is defined).  */
+# define _POSIX_SOURCE	1
+# if defined _XOPEN_SOURCE && (_XOPEN_SOURCE - 0) < 500
+#  define _POSIX_C_SOURCE	2
+# elif defined _XOPEN_SOURCE && (_XOPEN_SOURCE - 0) < 600
+#  define _POSIX_C_SOURCE	199506L
+# elif defined _XOPEN_SOURCE && (_XOPEN_SOURCE - 0) < 700
+#  define _POSIX_C_SOURCE	200112L
+# else
+#  define _POSIX_C_SOURCE	200809L
+# endif
+# define __USE_POSIX_IMPLICITLY	1
+
+# define __USE_POSIX	1
+
+# define __USE_POSIX2	1
+
+
+
+
+
+
+
+
+# define __USE_FILE_OFFSET64	1
+
+# define __USE_MISC	1
+
+
+
+
+
+# define __USE_REENTRANT	1
+
+# if _FORTIFY_SOURCE > 1
+#  define __USE_FORTIFY_LEVEL 2
+# else
+#  define __USE_FORTIFY_LEVEL 1
+# endif
+
+/* Define __STDC_IEC_559__ and other similar macros.  */

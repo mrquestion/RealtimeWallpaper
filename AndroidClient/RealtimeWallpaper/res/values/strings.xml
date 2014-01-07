@@ -1,0 +1,9 @@
+<resources>
+    <string name="name">Realtime Wallpaper</string>
+    
+    <string name="service_uri">soft.rw.service.RealtimeWallpaper.start</string>
+    
+    <string name="input_main_host">Input IP Address.</string>
+    <string name="button_main_start">Service Start</string>
+    <string name="button_main_stop">Service Stop</string>
+</resources>
